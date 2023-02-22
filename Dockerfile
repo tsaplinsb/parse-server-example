@@ -2,13 +2,13 @@ FROM node:latest
 
 RUN mkdir parse
 
-ADD . /parse
+ADD ./parse-server-example /parse
 WORKDIR /parse
 RUN npm install
 
-ENV APP_ID setYourAppId
+ENV APP_ID myAppId
 ENV MASTER_KEY setYourMasterKey
-ENV DATABASE_URI setMongoDBURI
+ENV DATABASE_URI mongodb://localhost
 
 # Optional (default : 'parse/cloud/main.js')
 # ENV CLOUD_CODE_MAIN cloudCodePath

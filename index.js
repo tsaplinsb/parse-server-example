@@ -39,8 +39,9 @@ if (!test) {
 }
 
 // Parse Server plays nicely with the rest of your web routes
+const hostName = process.env.HOSTNAME || 'null';
 app.get('/', function (req, res) {
-  res.status(200).send('I dream of being a website.  Please star the parse-server repo on GitHub!');
+  res.status(200).send('I dream of being a website.  Please star the parse-server repo on GitHub! Hostname is ' + hostName);
 });
 
 // There will be a test page available on the /test path of your server url

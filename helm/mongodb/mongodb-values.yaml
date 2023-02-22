@@ -1,0 +1,8 @@
+architecture: replicaset
+replicaCount: 3
+replicaSetName: db
+auth:
+  enabled: false
+  rootPassword: notbestpractise
+persistence:
+  size: 1Gi  
