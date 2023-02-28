@@ -42,8 +42,8 @@ pipeline {
             sh "/kaniko/executor --dockerfile ${WORKDIR}/${REPOSITORY_NAME}/Dockerfile \
             --context ${WORKDIR} \
             --force \
-            --destination=cr.yandex/crpj598t6od00amdn581/${REPOSITORY_NAME}:${BUILD_NUMBER} \
-            --destination=cr.yandex/crpj598t6od00amdn581/${REPOSITORY_NAME}:latest" 
+            --destination=cr.yandex/crp7qupp94a729rvpl8o/${REPOSITORY_NAME}:${BUILD_NUMBER} \
+            --destination=cr.yandex/crp7qupp94a729rvpl8o/${REPOSITORY_NAME}:latest" 
           }
 
         }
@@ -55,7 +55,7 @@ pipeline {
       steps {
           container('helm-cli') {
             script {
-              withKubeConfig([credentialsId: 'kubernetes-creds', serverUrl: 'https://158.160.55.15/', namespace: 'parse-server-example']) {
+              withKubeConfig([credentialsId: 'kubernetes-creds', serverUrl: 'https://10.30.73.85', namespace: 'parse-server-example']) {
                       sh "helm upgrade ${REPOSITORY_NAME} ${WORKDIR}/${REPOSITORY_NAME}/helm/app --install \
                           --namespace ${REPOSITORY_NAME} --create-namespace \
                           --set image.tag=\"${BUILD_NUMBER}\""

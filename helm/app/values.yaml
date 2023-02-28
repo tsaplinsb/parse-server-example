@@ -5,7 +5,7 @@
 replicaCount: 3
 
 image:
-  repository: cr.yandex/crpj598t6od00amdn581/parse-server-example
+  repository: cr.yandex/crp7qupp94a729rvpl8o/parse-server-example
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -41,25 +41,7 @@ service:
   port: 1337
 
 ingress:
-  enabled: true
-  className: ""
-  annotations:      
-    ingress.alb.yc.io/subnets: e9b0f893ij268giovens
-    ingress.alb.yc.io/security-groups: enpo3uq5sv5fg6fd0vdq,enpbvsas2hpc7fpvubpa
-    ingress.alb.yc.io/external-ipv4-address: auto
-    ingress.alb.yc.io/group-name: appgroup
-
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: parse-server.app.tsaplinsb.tech
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-  tls: 
-      - secretName: yc-certmgr-cert-id-fpqrjnragff9n7d877kj
-        hosts:
-          - parse-server.app.tsaplinsb.tech
+  enabled: false
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
