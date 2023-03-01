@@ -1,4 +1,4 @@
-{{- if and (include "parse.host" .) .Values.dashboard.enabled -}}
+{{- if .Values.dashboard.enabled -}}
 apiVersion: {{ include "common.capabilities.deployment.apiVersion" . }}
 kind: Deployment
 metadata:
