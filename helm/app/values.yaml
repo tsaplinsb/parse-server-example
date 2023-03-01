@@ -41,7 +41,7 @@ diagnosticMode:
   ##
   args:
     - infinity
-    
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -183,7 +183,7 @@ dashboard:
   ## Defaults to a random 10-character alphanumeric string if not set
   ## ref: https://github.com/bitnami/containers/tree/main/bitnami/parse-dashboard#configuration
   ##
-  password: ""
+  password: "admin"
   ## @param dashboard.appName Parse Dashboard application name
   ## ref: https://github.com/bitnami/containers/tree/main/bitnami/parse-dashboard#configuration
   ##

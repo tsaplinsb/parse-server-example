@@ -31,11 +31,7 @@ spec:
         {{- include "common.tplvalues.render" (dict "value" .Values.dashboard.podLabels "context" $) | nindent 8 }}
         {{- end }}
     spec:
-      serviceAccountName: {{ template "parse.serviceAccountName" . }}
-      {{- include "parse.imagePullSecrets" . | nindent 6 }}
-      {{- if .Values.dashboard.hostAliases }}
-      hostAliases: {{- include "common.tplvalues.render" (dict "value" .Values.dashboard.hostAliases "context" $) | nindent 8 }}
-      {{- end }}
+      serviceAccountName: {{ include "helm.serviceAccountName" . }}
       {{- if .Values.dashboard.affinity }}
       affinity: {{- include "common.tplvalues.render" ( dict "value" .Values.dashboard.affinity "context" $) | nindent 8 }}
       {{- else }}
@@ -87,7 +83,7 @@ spec:
           {{- end }}
           env:
             - name: BITNAMI_DEBUG
-              value: {{ ternary "true" "false" (or .Values.dashboard.image.debug .Values.diagnosticMode.enabled) | quote }}
+              value: "true"
             - name: PARSE_DASHBOARD_USER
               value: {{ .Values.dashboard.username }}
             - name: PARSE_DASHBOARD_PASSWORD
@@ -96,20 +92,17 @@ spec:
                   name: {{ include "common.names.fullname" . }}
                   key: parse-dashboard-password
             - name: PARSE_HOST
-              value: {{ include "parse.host" . | quote }}
+              value: "10.30.73.94"
             - name: PARSE_USE_HOSTNAME
               value: {{ ternary "yes" "no" .Values.ingress.enabled | quote }}
             - name: PARSE_PORT_NUMBER
-              value: {{ include "parse.external-port" . | quote }}
+              value: "31278"
             - name: PARSE_PROTOCOL
               value: {{ .Values.dashboard.parseServerUrlProtocol | quote }}
             - name: PARSE_APP_ID
-              value: {{ .Values.dashboard.appId | quote }}
+              value: myAppId
             - name: PARSE_MASTER_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "common.names.fullname" . }}
-                  key: master-key
+              value: setYourMasterKey
             - name: PARSE_DASHBOARD_APP_NAME
               value: {{ .Values.dashboard.appName | quote }}
             {{- if .Values.dashboard.extraEnvVars }}
