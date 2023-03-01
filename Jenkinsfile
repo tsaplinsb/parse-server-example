@@ -56,6 +56,10 @@ pipeline {
           container('helm-cli') {
             script {
               withKubeConfig([credentialsId: 'kubernetes-creds', serverUrl: 'https://10.30.73.85', namespace: 'parse-server-example']) {
+                      
+                      
+                      sh "helm dependency build"
+                      
                       sh "helm upgrade ${REPOSITORY_NAME} ${WORKDIR}/${REPOSITORY_NAME}/helm/app --install \
                           --namespace ${REPOSITORY_NAME} --create-namespace \
                           --set image.tag=\"${BUILD_NUMBER}\""
